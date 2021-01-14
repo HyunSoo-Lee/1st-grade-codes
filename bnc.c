@@ -15,26 +15,44 @@ int main(void) {
                 i--;
         }
     }
-    
     printf("**Answer**");
     for (int i = 0; i < 4; i++) {
         printf("%d", ans_arr[i]);
     }
+    printf("\n");
     
     while (1) {
         int input = 0;
         int cpr_arr[4] = { 0 };
-        printf("\n**Input**");
-        scanf("%d", &input);
-        for (int i = 1; i < 5; i++) {
-            cpr_arr[i - 1] = (input % power(10, i)) / power(10, i - 1);    
-            //cpr_arr[i-1] : inputÀ» 10ÀÇ i½ÂÀ¸·Î ³ª´« ³ª¸ÓÁö¸¦ ´Ù½Ã 10ÀÇ i-1½ÂÀ¸·Î ³ª´« ÇØ ex) 1234 cpr_arr[0]Àº 4, cpr_arr[1]´Â 3...
+        while (1) {
+            int counta = 0;
+            int countb = 0;
+            printf("Input : ");
+            scanf("%d", &input);
+            for (int i = 1; i < 5; i++) {
+                cpr_arr[i - 1] = (input % power(10, i)) / power(10, i - 1);
+            } // cpr_arrì— ëŒ€ìž…
+            for (int i = 0; i < 4; i++) {
+                for (int k = 0; k < i; k++) {
+                    if (cpr_arr[i] == cpr_arr[k])
+                        counta++; //ê°™ì€ ìˆ«ìžê°€ ìžˆë‹¤ë©´, countê°’ì„ 1 ì¦ê°€
+                }
+            }
+            for (int i = 0; i < 4; i++) {
+                if (cpr_arr[i] == 0)
+                    countb++;
+            }
+            if (counta == 0 && countb == 0) {
+                break;
+            }
+            else
+                printf("**Caution: ìˆ«ìžê°€ ì¤‘ë³µë˜ê±°ë‚˜, 0ì´ ë“¤ì–´ê°”ìŠµë‹ˆë‹¤.**\nTry again...\n\n");
         }
         int b_count = 0;
-        int a_count = 0;
+        int s_count = 0;
         for (int t = 0; t < 4; t++) {
             if (cpr_arr[3 - t] == ans_arr[t]) {
-                a_count++;
+                s_count++;
             }
             else
                 for (int k = 0; k < 4; k++) {
@@ -42,16 +60,16 @@ int main(void) {
                         b_count++;
                     }
                 }
-
         }
-        if (a_count == 4) {
+        if (s_count == 4) {
             printf("*** Congratulation, You Win!!! ***\n");
-                break;
+            break;
         }
-        printf("Strike : %d \nBall : %d\nTry again...\n\n", a_count, b_count);
+        printf("Strike : %d \nBall : %d\nTry again...\n\n", s_count, b_count);
     }
     return 0;
 }
+
 
 int power(int x, int y) {
     if (y == 0) return 1;
