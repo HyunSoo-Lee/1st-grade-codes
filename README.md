@@ -1,1 +1,1 @@
-codes about simple games like bulls&cows, Minesweeper, etc
+Codes about simple games like bulls&cows, Minesweeper, etc
