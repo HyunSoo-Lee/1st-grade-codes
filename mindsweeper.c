@@ -5,12 +5,18 @@
 #define MAX_MINE_COUNT 10
 #define SIZE 9
 
+int neighborhood_count(int, int); //주변 지뢰 수 
+int click(int, int); //열림 함수
+int UI(); //최종 인터페이스, 블록 모양
+int lose(); //패배 조건
+int win(); //승리 조건
+
 struct cell {
 	int mine; // 지뢰 존재 유무 1 or 0
 	int count; // 주위 지뢰 개수 0 ~ 9
 	int open; // clicked(1), unclick(0)
 	int ui; 
-	//네모블럭 전 숫자 ui: 클릭된 cell은 0, 오픈 안된 cell은 9, 지뢰 위치가 눌렸을때는 10, 나머지는 count 숫자
+	//네모블럭 전 숫자 ui: 클릭된 cell은 0, 오픈 안된 cell은 9, 지뢰 위치가 눌렸을때는 10, 나머지는 count 숫자 그대로
 };
 
 struct cell arr_cl[SIZE][SIZE] = { 0 };
@@ -41,7 +47,7 @@ int main(void) {
 	//		printf("%d|%d  ", arr_cl[x][y].mine, arr_cl[x][y].count);
 	//	}
 	//	printf("\n");
-	//}//지뢰, 카운트 테스트 프린트 (답지)
+	//}//답지 프린트
 
 	while (1) {
 		system("cls");
